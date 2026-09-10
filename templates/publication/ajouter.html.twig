@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="container">
+<div class="form-ajouter">
 
     <h1>Créer une publication</h1>
 
@@ -14,7 +14,12 @@
         {{ form_row(form.image) }}
         {{ form_row(form.visibilite) }}
 
-        <button type="submit">Publier</button>
+        <button class="btn-ajouter" type="submit">Publier</button>
+        <div>
+            <a href="{{ path('app_feed') }}" class="btn-retour">
+                Retour
+            </a>
+        </div>
 
     {{ form_end(form) }}
 

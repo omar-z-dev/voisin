@@ -14,12 +14,19 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class PublicationController extends AbstractController
 {
+
+    /*=========================
+              Ajouter
+    =========================*/
     #[Route('/publication/ajouter', name: 'app_publication_new')]
-    #[IsGranted('ROLE_USER')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function ajouter (Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Seul un utilisateur connecté peut créer un article
+        $this->denyAccessUnlessGranted('ROLE_USER');
+         // Création d’un public vide
         $publication = new Publication();
 
+        // Création du formulaire
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
 
