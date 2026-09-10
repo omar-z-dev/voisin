@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voisin. - Fil d'actualité{% endblock %}
+
+{% block body %}
+
+<header>
+    <nav class="navbar container">
+
+        <div class="logo">
+            <a href="{{ path('app_feed') }}">Voisin.</a>
+        </div>
+
+        <ul class="menu">
+            <li>
+                <a href="{{ path('app_feed') }}">Accueil</a>
+            </li>
+            <li>
+                <a href="#">Mon profil</a>
+            </li>
+            <li>
+                <a href="#">Mes amis</a>
+            </li>
+            <li>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </li>
+        </ul>
+
+    </nav>
+</header>
+
+<main class="container">
+
+    <section class="feed-header">
+        <h1>Fil d'actualité</h1>
+
+        <p>
+            Bienvenue {{ user.pseudo }} !
+        </p>
+    </section>
+
+    <section class="publications">
+        <h2>Publications récentes</h2>
+
+        <p>Aucune publication pour le moment.</p>
+        <a href="{{ path('app_publication_new') }}">
+    Créer une publication
+</a>
+    </section>
+
+</main>
+
+{% endblock %}

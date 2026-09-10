@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voisin. - Accueil{% endblock %}
+
+{% block body %}
+
+    <header class="site-header">
+
+        <nav class="navbar container">
+
+
+            <div class="logo">
+                <a href="{{ path('app_home') }}">Home</a>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="{{ path('app_login') }}">Se connecter</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_register') }}">Créer un compte</a>
+                </li>
+            </ul>
+
+
+
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Bienvenue sur Voisin.</h2>
+            <p>
+                Partagez, échangez et créez des liens avec les autres membres.
+            </p>
+        </section>
+
+        <section>
+            <h2>Publications récentes</h2>
+
+            <p>Aucune publication pour le moment.</p>
+        </section>
+    </main>
+
+{% endblock %}

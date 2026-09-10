@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class RegistrationController extends AbstractController
 {
@@ -27,6 +28,22 @@ class RegistrationController extends AbstractController
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            
+            //photo
+             $photo = $form->get('photo')->getData();
+
+            if ($photo instanceof UploadedFile) {
+                $nomPhoto = uniqid() . '.' . $photo->guessExtension();
+
+                $photo->move(
+                    $this->getParameter('kernel.project_dir') . '/public/uploads/profile',
+                    $nomPhoto
+                );
+
+                $user->setPhoto($nomPhoto);
+            }
+              // Date d'inscription
+            $user->setDateInscription(new \DateTimeImmutable());
 
             $entityManager->persist($user);
             $entityManager->flush();

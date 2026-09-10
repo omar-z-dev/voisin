@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle publication{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h1>Créer une publication</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.texte) }}
+        {{ form_row(form.image) }}
+        {{ form_row(form.visibilite) }}
+
+        <button type="submit">Publier</button>
+
+    {{ form_end(form) }}
+
+</div>
+
+{% endblock %}
