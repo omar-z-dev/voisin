@@ -1,16 +1,11 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Voisin. - Fil d'actualité{% endblock %}
-
 {% block body %}
-
-<header>
+<header class="site-header">
     <nav class="navbar container">
-
         <div class="logo">
             <a href="{{ path('app_feed') }}">Voisin.</a>
         </div>
-
         <ul class="menu">
             <li>
                 <a href="{{ path('app_feed') }}">Accueil</a>
@@ -19,35 +14,49 @@
                 <a href="#">Mon profil</a>
             </li>
             <li>
-                <a href="#">Mes amis</a>
+                <a href="{{ path('app_amis') }}">Mes amis</a>
             </li>
             <li>
                 <a href="{{ path('app_logout') }}">Se déconnecter</a>
             </li>
         </ul>
-
     </nav>
 </header>
-
-<main class="container">
-
-    <section class="feed-header">
-        <h1>Fil d'actualité</h1>
-
-        <p>
-            Bienvenue {{ user.pseudo }} !
-        </p>
-    </section>
-
+<main>
     <section class="publications">
-        <h2>Publications récentes</h2>
-
-        <p>Aucune publication pour le moment.</p>
+        <h2>Fil d'actualité</h2>
         <a href="{{ path('app_publication_new') }}">
-    Créer une publication
-</a>
+            Créer une publication
+        </a>
+        <div class="all-pubs">
+            {% for publication in publications %}
+                <article class="pub">
+                    <h3>{{ publication.user.pseudo }}</h3>
+                    <p>{{ publication.texte }}</p>
+                    {% if publication.image %}
+                        <img
+                            src="{{ asset('uploads/publications/' ~ publication.image) }}"
+                            alt="Image de la publication"
+                        >
+                    {% endif %}
+                    <small>
+                        Publié le {{ publication.dateCreation|date('d/m/Y à H:i') }}
+                    </small>
+
+                    {% if publication.user == app.user %}
+
+                        <a href="{{ path('app_publication_modifier', {'id': publication.id}) }}">
+                            Modifier
+                        </a>
+                        <form method="post" action="{{ path('app_publication_supprimer', {'id': publication.id}) }}">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    {% endif %}
+                </article>
+            {% else %}
+                <p>Aucune publication pour le moment.</p>
+            {% endfor %}
+        </div>
     </section>
-
 </main>
-
 {% endblock %}

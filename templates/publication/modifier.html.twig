@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la publication{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h1>Modifier la publication</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.texte) }}
+        {{ form_row(form.image) }}
+        {{ form_row(form.visibilite) }}
+
+        <button type="submit">Modifier</button>
+
+    {{ form_end(form) }}
+
+</div>
+
+{% endblock %}

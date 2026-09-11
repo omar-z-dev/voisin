@@ -58,4 +58,53 @@ final class PublicationController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    /*=========================
+              Modifier
+    =========================*/
+    #[Route('/publication/{id}/modifier', name: 'app_publication_modifier')]
+    public function modifier(
+        Publication $publication,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if ($publication->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $form = $this->createForm(PublicationType::class, $publication);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_feed');
+        }
+
+        return $this->render('publication/modifier.html.twig', [
+            'form' => $form,
+        ]);
+    }
+    /*=========================
+              Supprimer
+    =========================*/
+    #[Route('/publication/{id}/supprimer', name: 'app_publication_supprimer', methods: ['POST'])]
+    public function supprimer(
+        Publication $publication,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if ($publication->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $entityManager->remove($publication);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_feed');
+    }
 }

@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes amis - Voisin.{% endblock %}
+
+{% block body %}
+
+<header class="site-header">
+
+    <nav class="navbar container">
+
+        <div class="logo">
+            <a href="{{ path('app_feed') }}">Voisin.</a>
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="{{ path('app_feed') }}">Accueil</a>
+            </li>
+
+            <li>
+                <a href="#">Mon profil</a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_amis') }}">Mes amis</a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<main class="container">
+
+    <h1>Mes amis</h1>
+
+    {% for amitie in amities %}
+
+        {% if amitie.demandeur == app.user %}
+            {% set ami = amitie.destinataire %}
+        {% else %}
+            {% set ami = amitie.demandeur %}
+        {% endif %}
+
+        <div class="ami">
+
+            <h2>{{ ami.pseudo }}</h2>
+
+            {% if ami.photo %}
+                <img
+                    src="{{ asset('uploads/profile/' ~ ami.photo) }}"
+                    alt="Photo de {{ ami.pseudo }}"
+                >
+            {% endif %}
+
+        </div>
+
+    {% else %}
+
+        <p>Vous n'avez pas encore d'amis.</p>
+
+    {% endfor %}
+
+</main>
+
+{% endblock %}

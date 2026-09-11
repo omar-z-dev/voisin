@@ -11,7 +11,6 @@ img {
     margin: 2rem auto;
 }
 body {
-    background-color: rgb(241, 243, 235);
     margin: 0px;
     padding: 0px;
 }
@@ -24,18 +23,25 @@ a {
     text-decoration: none;
     color: black;
 }
-/*header {
+
+main {
+    background-color: #f0e8e3;
+    min-height: 100vh;
+    padding-top: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+header {
     position: fixed;
+    background-color: white;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-
-    background-color: transparent;
-    transition: background-color 0.3s ease;
 }
 
-header.scrolled {
+/*header.scrolled {
     background-color: rgb(234, 226, 178);
 }*/
 
@@ -171,26 +177,6 @@ form input:focus {
 }
 
 /****profil****************************/
-.profil {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-}
-
-.profil img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ddd;
-}
-
-.profil:hover img {
-    border-color: #3498db;
-}
 
 /**************register ***************/
 .register-form {
@@ -375,353 +361,25 @@ form[name="article"] > div {
 .form-btn {
     margin-top: 3rem;
 }
-
-/*publier*/
-.btn-publier {
-    display: inline-block;
-    padding: 3px 10px;
-    background-color: #28a745;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-.btn-publier:hover {
-    background-color: rgb(69, 43, 43);
-}
-
-/*depublier*/
-.btn-depublier {
-    display: inline-block;
-    padding: 3px 10px;
-    background-color: #d7c038;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-.btn-depublier:hover {
-    background-color: rgb(69, 43, 43);
-}
-
-.btn-lire-la-suite {
-    font-weight: bold;
-    text-align: right;
-}
-.btn-lire-la-suite a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-}
-.btn-lire-la-suite a:hover {
-    text-decoration: underline;
-}
-
-.editer {
-    align-self: flex-start;
-    border: solid 1px black;
-    padding: 3px 10px;
-    border-radius: 0.2rem;
-}
-
-.editer:hover {
-    background-color: rgb(187, 180, 180);
-    cursor: pointer;
-}
-.btn-retour {
-    align-self: flex-start;
-    padding: 0.5rem;
-    border-radius: 0.2rem;
-    margin-top: 2rem;
-    background-color: rgb(231, 191, 49);
-}
-.btn-retour:hover {
-    background-color: rgb(187, 180, 180);
-    cursor: pointer;
-}
-
-.auteur {
-    color: #7f7f7f;
-}
-.banniere {
-    width: 80%;
-    margin: auto;
-}
-
-/*****************liste users**************/
-.table-list-users {
-    margin: 2rem 0rem;
-    width: 80%;
-}
-
-.table-list-users th,
-.table-list-users td {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    text-align: center;
-}
-
-.table-list-users tr:hover {
-    background-color: #c7c1c1;
-}
-
-/******************  like com  ****************/
-
-.commentaires-likes {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.stats {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.stats img {
-    width: 20px;
-    height: 20px;
-}
-.btn-supprimer {
-    display: flex;
-    padding: 3px 10px;
-    margin-left: auto;
-    border-radius: 0.2rem;
-    background-color: rgb(230, 158, 158);
-    border: none;
-    margin-top: 0.5rem;
-}
-.btn-supprimer:hover {
-    background-color: rgb(200, 43, 43);
-    cursor: pointer;
-}
-
-.btn-bannir {
-    display: flex;
-    padding: 3px 10px;
-    margin-left: auto;
-    border-radius: 0.2rem;
-    background-color: rgb(233, 168, 89);
-    border: none;
-}
-.btn-bannir:hover {
-    background-color: rgb(218, 124, 10);
-    cursor: pointer;
-}
-/***********afficher article **************************/
-
-.container-article {
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 30px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.container-article h1 {
-    margin: 0 0 15px;
-    font-size: 2.5rem;
-    color: #222;
-}
-
-.date {
-    color: #777;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-}
-
-.container-article img {
-    width: 100%;
-    max-height: 450px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.container-article p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #444;
-    text-align: justify;
-}
-
-.btn-retour {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 10px 20px;
-    background: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: 0.3s;
-}
-
-.btn-retour:hover {
-    background: #217dbb;
-}
-/******** barre de recherche **********/
-.recherche {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
-    margin: 2rem auto;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    background: rgb(246, 244, 244);
-    overflow: hidden;
-}
-.recherche:focus-within {
-    border-color: #5b9cff;
-    box-shadow: 0 0 0 3px rgba(91, 156, 255, 0.2);
-}
-.recherche input {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 12px 18px;
-    font-size: 16px;
-    background: transparent;
-}
-
-.btn-recherche {
-    border: none;
-    background: transparent;
-    padding: 0 16px;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-/*effacer texte */
-.btn-effacer {
-    border: none;
-    background: transparent;
-    font-size: 22px;
-    cursor: pointer;
-    padding: 0 8px;
-}
-
-.btn-effacer:hover {
-    background: rgb(221, 221, 171);
-    border-radius: 50%;
-}
-
-/**************/
-.contenu-affichage {
-    margin-bottom: 2rem;
-}
-.categories-list {
-    display: flex;
-    flex-direction: row;
+/*** pubs**/
+.all-pubs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin-top: 2rem;
-    margin-bottom: 2rem;
-    justify-content: center;
 }
-.cat-single {
-    border: solid 1px rgb(203, 201, 201);
-    padding: 0.3rem 0.5rem;
-    border-radius: 0.5rem;
-    background-color: #e3dbdb;
-}
-.cat-single:hover {
-    cursor: pointer;
-    background-color: rgb(208, 200, 200);
-    box-shadow: 0 0 0 3px rgba(91, 156, 255, 0.2);
-}
-/********************like**************************************/
-.coeur {
-    width: 22px;
-    height: 22px;
-    fill: black;
-}
-
-.coeur.liked {
-    fill: red;
-}
-.btn-like {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    border: none;
-    background: none;
-    background: transparent;
-    line-height: 1;
-}
-/**********ajouter commentaire***********/
-.container-commentaire {
+.pub {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-top: 3rem;
+    justify-content: center;
+    gap: 0.2rem;
+    border: 1px solid rgb(203, 201, 201);
+    padding: 1rem;
+    border-radius: 0.2rem;
 }
 
-.commentaire-detail {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.date-commentaire {
-    color: #b6b0b0 !important;
-    font-size: 0.8rem !important;
-}
-.auteur-commentaire img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+.pub img {
     object-fit: cover;
-}
-.auteur-commentaire {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.container-commentaire textarea {
-    padding: 0.5rem;
-    border: solid 1px black;
-    border-radius: 0.2rem;
-    margin-bottom: 2rem;
-}
-.btn-commentaire {
-    display: block;
-    align-self: flex-end;
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.2rem;
-    background-color: transparent;
-    border: solid 1px black;
-}
-.btn-commentaire:hover {
-    background-color: rgb(187, 180, 180);
-    cursor: pointer;
-}
-.container-commentaire textarea {
-    padding: 0.5rem;
-    border: solid 1px black;
-    border-radius: 0.2rem;
-    margin-bottom: 2rem;
     width: 100%;
-}
-.commentaire {
-    border: solid 1px rgb(203, 201, 201);
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-}
-.commentaires-titre {
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+    border-radius: 5px;
 }
