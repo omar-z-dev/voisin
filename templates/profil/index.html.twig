@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil - {{ user.pseudo }}{% endblock %}
+
+{% block body %}
+
+<header class="site-header">
+    <nav class="navbar container">
+        <div class="logo">
+            <a href="{{ path('app_feed') }}">Voisin.</a>
+        </div>
+
+        <ul class="menu">
+            <li>
+                <a href="{{ path('app_feed') }}">Accueil</a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_profil', {'id': app.user.id}) }}">
+                    Mon profil
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_amis') }}">Mes amis</a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="profil-user">
+
+        <section class="profil">
+            <h2> Profil</h2>
+            {% if user.photo %}
+                <img
+                    src="{{ asset('uploads/profile/' ~ user.photo) }}"
+                    alt="Photo de {{ user.pseudo }}"
+                >
+            {% endif %}
+            <h1>{{ user.pseudo }}</h1>
+            {% if user.bio %}
+                <p>{{ user.bio }}</p>
+            {% endif %}
+            <p>
+                Inscrit le {{ user.dateInscription|date('d/m/Y') }}
+            </p>
+        </section>
+        
+        {% if user != app.user %}
+            <form method="post" action="{{ path('app_ami_demande', {'id': user.id}) }}">
+                <button class="btn-editer" type="submit">Ajouter en ami</button>
+            </form>
+        {% endif %}
+
+        <a class="btn-editer" href="{{ path('app_amis') }}">Retour</a>
+    </div>
+</main>
+{% endblock %}      

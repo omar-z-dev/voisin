@@ -1,47 +1,32 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Mes amis - Voisin.{% endblock %}
-
 {% block body %}
 
 <header class="site-header">
-
     <nav class="navbar container">
-
         <div class="logo">
             <a href="{{ path('app_feed') }}">Voisin.</a>
         </div>
-
         <ul class="menu">
-
             <li>
                 <a href="{{ path('app_feed') }}">Accueil</a>
             </li>
-
             <li>
                 <a href="#">Mon profil</a>
             </li>
-
             <li>
                 <a href="{{ path('app_amis') }}">Mes amis</a>
             </li>
-
             <li>
                 <a href="{{ path('app_logout') }}">Se déconnecter</a>
             </li>
-
         </ul>
-
     </nav>
-
 </header>
 
-<main class="container">
-
+<main>
     <h1>Mes amis</h1>
-
     {% for amitie in amities %}
-
         {% if amitie.demandeur == app.user %}
             {% set ami = amitie.destinataire %}
         {% else %}
@@ -49,7 +34,6 @@
         {% endif %}
 
         <div class="ami">
-
             <h2>{{ ami.pseudo }}</h2>
 
             {% if ami.photo %}
@@ -58,15 +42,32 @@
                     alt="Photo de {{ ami.pseudo }}"
                 >
             {% endif %}
-
         </div>
-
     {% else %}
-
         <p>Vous n'avez pas encore d'amis.</p>
-
     {% endfor %}
+     <h2>Les utilisateurs disponibles</h2>
 
+        <div class="utilisateurs">
+            {% for utilisateur in utilisateurs %}
+                {% if utilisateur != app.user %}
+                    <div class="utilisateur">
+                        
+                        {% if utilisateur.photo %}
+                            <img
+                                src="{{ asset('uploads/profile/' ~ utilisateur.photo) }}"
+                                alt="Photo de {{ utilisateur.pseudo }}"
+                            >
+                        {% endif %}
+
+                        <h3>{{ utilisateur.pseudo }}</h3>
+
+                        <a class="btn-editer" href="{{ path('app_profil', {'id': utilisateur.id}) }}">
+                            Voir le profil
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
 </main>
-
 {% endblock %}

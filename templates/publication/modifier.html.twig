@@ -3,18 +3,50 @@
 {% block title %}Modifier la publication{% endblock %}
 
 {% block body %}
+<header class="site-header">
+    <nav class="navbar container">
+        <div class="logo">
+            <a href="{{ path('app_feed') }}">Voisin.</a>
+        </div>
+
+        <ul class="menu">
+            <li>
+                <a href="{{ path('app_feed') }}">Accueil</a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_profil', {'id': app.user.id}) }}">
+                    Mon profil
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_amis') }}">Mes amis</a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
+</header>
 
 <div class="container">
 
     <h1>Modifier la publication</h1>
 
-    {{ form_start(form) }}
+       {{ form_start(form, {'attr': {'class': 'publication-form'}}) }}
 
         {{ form_row(form.texte) }}
         {{ form_row(form.image) }}
         {{ form_row(form.visibilite) }}
 
-        <button type="submit">Modifier</button>
+        <button class="btn-editer" type="submit">Valider la modification</button>
+        <div>
+            <a  href="{{ path('app_feed') }}" class="btn-editer">
+                Retour
+            </a>
+        </div>
 
     {{ form_end(form) }}
 

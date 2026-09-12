@@ -10,9 +10,18 @@ img {
     width: 90%;
     margin: 2rem auto;
 }
+
+.profil-user {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 90%;
+    margin: 2rem auto;
+}
 body {
     margin: 0px;
-    padding: 0px;
+    padding: 15px;
+    background-color: #f0e8e3;
 }
 
 li {
@@ -144,6 +153,9 @@ form input:focus {
 }
 
 .form-ajouter {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     margin-top: 1rem;
     margin-left: 1rem;
 }
@@ -312,6 +324,7 @@ form input:focus {
     border: 1px solid rgb(203, 201, 201);
 }
 .btn-ajouter {
+    align-self: flex-start;
     background-color: #3498db;
     padding: 0.5rem;
     color: white;
@@ -322,15 +335,13 @@ form input:focus {
     appearance: none;
 }
 .btn-editer {
+    align-self: flex-start;
     background-color: #3498db;
     padding: 0.5rem;
     color: white;
     border-radius: 0.2rem;
     font-weight: bold;
     border: none;
-    box-shadow: none;
-    appearance: none;
-    margin-top: 2rem;
 }
 
 .btn-ajouter:hover {
@@ -339,7 +350,7 @@ form input:focus {
 }
 
 /****************formulaire*************************/
-form[name="article"] label {
+form[name="form-ajouter"] label {
     display: block;
     font-size: 22px;
     color: blue;
@@ -371,7 +382,7 @@ form[name="article"] > div {
 .pub {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     gap: 0.2rem;
     border: 1px solid rgb(203, 201, 201);
     padding: 1rem;
@@ -382,4 +393,60 @@ form[name="article"] > div {
     object-fit: cover;
     width: 100%;
     border-radius: 5px;
+}
+.utilisateurs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+    border: solid 1px rgb(203, 201, 201);
+    padding: 1rem;
+    border-radius: 0.2rem;
+}
+
+.utilisateur {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+    border: 1px solid rgb(203, 201, 201);
+    padding: 1rem;
+    border-radius: 0.2rem;
+}
+.utilisateur img {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+}
+
+.alert {
+    padding-top: 5rem;
+    margin: 1rem;
+    color: red;
+    border-radius: 0.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.publications {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 2rem;
+}
+.publication-form {
+    display: flex;
+    flex-direction: column;
+    gap: 02rem;
+    padding: 2rem;
+    border: solid 1px rgb(203, 201, 201);
+    border-radius: 0.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 50%;
+    margin-top: 5rem;
+}
+.bienvenue {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
