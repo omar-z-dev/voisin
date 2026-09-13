@@ -11,6 +11,13 @@
         </div>
 
         <ul class="menu">
+            {% if app.user %}
+                <li>
+                    <span class="bonjour">
+                        Bonjour {{ app.user.pseudo }}
+                    </span>
+                </li>
+            {% endif %}
             <li>
                 <a href="{{ path('app_feed') }}">Accueil</a>
             </li>

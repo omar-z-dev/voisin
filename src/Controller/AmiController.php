@@ -13,6 +13,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class AmiController extends AbstractController
 {
+    /*==========================
+               INDEX       
+    ==========================*/
     #[Route('/amis', name: 'app_amis')]
     public function index(
         FriendshipRepository $friendshipRepository,
@@ -22,16 +25,31 @@ class AmiController extends AbstractController
 
         $user = $this->getUser();
 
+        // Récupérer les amis de l'utilisateur connecté
         $amities = $friendshipRepository->findAcceptedFriendships($user);
 
+        // Récupérer les demandes d'ami en attente de l'utilisateur connecté
+        $demandes = $friendshipRepository->findBy([
+            'destinataire' => $user,
+            'statut' => 'en_attente'
+        ]);
+
+        // Récupérer tous les utilisateurs de l'application
         $utilisateurs = $userRepository->findAll();
 
         return $this->render('amis/index.html.twig', [
             'amities' => $amities,
             'utilisateurs' => $utilisateurs,
+            'demandes' => $demandes,
+            'user' => $user
         ]);
     }
 
+    /*=============================
+
+             DEMANDE D AMI   
+
+    ==============================*/
    #[Route('/amis/demande/{id}', name: 'app_ami_demande', methods: ['POST'])]
     public function demande(
         User $destinataire,
@@ -39,7 +57,6 @@ class AmiController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
         $this->denyAccessUnlessGranted('ROLE_USER');
-
         $demandeur = $this->getUser();
 
         if ($demandeur === $destinataire) {
@@ -51,9 +68,7 @@ class AmiController extends AbstractController
         }
 
         $amitieExistante = $friendshipRepository->findFriendship(
-            $demandeur,
-            $destinataire
-        );
+            $demandeur, $destinataire);
 
         if ($amitieExistante) {
             $this->addFlash('error', 'Une demande d’amitié existe déjà.');
@@ -73,9 +88,73 @@ class AmiController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('success', 'Demande d’amitié envoyée.');
-
         return $this->redirectToRoute('app_profil', [
             'id' => $destinataire->getId(),
+        ]);
+    }
+    /*=======================================
+
+             ACCEPTER UNE DEMANDE D AMI  
+
+    ========================================*/
+   #[Route('/amis/accepter/{id}', name: 'app_ami_accepter', methods: ['POST'])]
+    public function accepter(
+        Friendship $amitie,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if ($amitie->getDestinataire() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $amitie->setStatut('acceptee');
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_amis');
+    }
+    /*=======================================
+
+             REFUSER UNE DEMANDE D AMI  
+
+    ========================================*/
+   #[Route('/amis/refuser/{id}', name: 'app_ami_refuser', methods: ['POST'])]
+    public function refuser(
+        Friendship $amitie,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if ($amitie->getDestinataire() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $entityManager->remove($amitie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_amis');
+    }
+    /*==================================================
+
+             ROUTE POUR AFFICHER LES DEMANDES D'AMI
+
+    ====================================================*/
+    #[Route('/amis/demandes', name: 'app_demandes')]
+    public function demandes(
+        FriendshipRepository $friendshipRepository
+    ): Response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $user = $this->getUser();
+
+        $demandes = $friendshipRepository->findBy([
+            'destinataire' => $user,
+            'statut' => 'en_attente'
+        ]);
+
+        return $this->render('amis/demandes.html.twig', [
+            'demandes' => $demandes,
         ]);
     }
 }

@@ -23,7 +23,7 @@ class FriendshipRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('f')
             ->where('f.statut = :statut')
             ->andWhere('f.demandeur = :user OR f.destinataire = :user')
-            ->setParameter('statut', 'accepted')
+            ->setParameter('statut', 'acceptee')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();

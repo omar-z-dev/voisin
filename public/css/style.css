@@ -343,7 +343,10 @@ form input:focus {
     font-weight: bold;
     border: none;
 }
-
+.btn-editer:hover {
+    background-color: rgb(104, 73, 73);
+    cursor: pointer;
+}
 .btn-ajouter:hover {
     background-color: rgb(69, 43, 43);
     cursor: pointer;
@@ -449,4 +452,72 @@ form[name="article"] > div {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+.demandes-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 25px;
+    height: 25px;
+    padding: 0 5px;
+    border-radius: 50%;
+    background-color: #d86b35;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/**************** liste des demandes ****************/
+.demande-ami {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: solid 1px rgb(203, 201, 201);
+    border-radius: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 70%;
+    margin-top: 2rem;
+}
+.demande-avatar img {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.demande-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+.demande-user {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+.ami {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0.5rem;
+    border: solid 1px rgb(203, 201, 201);
+    border-radius: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 10%;
+}
+.ami img {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }

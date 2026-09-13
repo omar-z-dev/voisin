@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes demandes - Voisin.{% endblock %}
+
+{% block body %}
+
+<header class="site-header">
+    <nav class="navbar container">
+        <div class="logo">
+            <a href="{{ path('app_feed') }}">Voisin.</a>
+        </div>
+        <ul class="menu">
+            {% if app.user %}
+                <li>
+                    <span class="bonjour">
+                        Bonjour {{ app.user.pseudo }}
+                    </span>
+                </li>
+            {% endif %}
+            <li>
+                <a href="{{ path('app_feed') }}">Accueil</a>
+            </li>
+            <li>
+                <a href="#">Mon profil</a>
+            </li>
+            <li>
+                <a href="{{ path('app_amis') }}">Mes amis</a>
+            </li>
+            <li>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container">
+
+    <h1>Mes demandes d'amitié</h1>
+    <section class="demandes-container">
+        {% for demande in demandes %}
+            <div class="demande-ami">
+                <div class="demande-user">
+                    <div class="demande-avatar">
+                        {% if demande.demandeur.photo %}
+                            <img
+                                src="{{ asset('uploads/profile/' ~ demande.demandeur.photo) }}"
+                                alt="Photo de {{ demande.demandeur.pseudo }}"
+                            >
+                        {% endif %}
+                    </div>
+                    <div>
+                        <strong>{{ demande.demandeur.pseudo }}</strong>
+                        <p>
+                            Envoyée le
+                            {{ demande.dateCreation|date('d/m/Y à H:i') }}
+                        </p>
+                    </div>
+                </div>
+                <div class="demande-actions">
+                    <form method="post" action="{{ path('app_ami_refuser', {'id': demande.id}) }}">
+                        <button type="submit" class="btn-ajouter">
+                            Refuser
+                        </button>
+                    </form>
+
+                    <form method="post" action="{{ path('app_ami_accepter', {'id': demande.id}) }}">
+                        <button type="submit" class="btn-ajouter">
+                            Accepter
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% else %}<p>Aucune demande d'amitié.</p>{% endfor %}
+    </section>
+    <a class="btn-ajouter" href="{{ path('app_amis') }}">Retour à mes amis</a>
+
+</main>
+{% endblock %}

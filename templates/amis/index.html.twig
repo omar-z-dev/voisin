@@ -8,6 +8,13 @@
             <a href="{{ path('app_feed') }}">Voisin.</a>
         </div>
         <ul class="menu">
+            {% if app.user %}
+                <li>
+                    <span class="bonjour">
+                        Bonjour {{ app.user.pseudo }}
+                    </span>
+                </li>
+            {% endif %}
             <li>
                 <a href="{{ path('app_feed') }}">Accueil</a>
             </li>
@@ -25,6 +32,10 @@
 </header>
 
 <main>
+    <h2>Hello {{ user.pseudo }}</h2>
+
+    {# Mes amis #}
+
     <h1>Mes amis</h1>
     {% for amitie in amities %}
         {% if amitie.demandeur == app.user %}
@@ -46,6 +57,17 @@
     {% else %}
         <p>Vous n'avez pas encore d'amis.</p>
     {% endfor %}
+
+
+    {# Les demande d'amis recus #}
+
+    <a href="{{ path('app_demandes') }}" class="demandes-link">
+        Mes demandes
+        <span class="badge">{{ demandes|length }}</span>
+    </a>
+
+    {# Les utilisateurs disponibles #}
+
      <h2>Les utilisateurs disponibles</h2>
 
         <div class="utilisateurs">
