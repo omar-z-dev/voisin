@@ -11,17 +11,34 @@
         </div>
         <ul class="menu">
             {% if app.user %}
-                <li>
+                <li class="user-menu">
                     <span class="bonjour">
                         Bonjour {{ app.user.pseudo }}
                     </span>
+
+                    {# Avatar #}
+                    {% if app.user.photo %}
+                            <img
+                                class="avatar"
+                                src="{{ asset('uploads/profile/' ~ app.user.photo) }}"
+                                alt="Photo de profil"
+                            >
+                        {% else %}
+                            <img
+                                class="avatar"
+                                src="{{ asset('images/avatar-default.png') }}"
+                                alt="Photo de profil"
+                            >
+                    {% endif %} 
                 </li>
             {% endif %}
             <li>
                 <a href="{{ path('app_feed') }}">Accueil</a>
             </li>
             <li>
-                <a href="#">Mon profil</a>
+                <a href="{{ path('app_mon_profil') }}">
+                    Mon profil
+                </a>
             </li>
             <li>
                 <a href="{{ path('app_amis') }}">Mes amis</a>
@@ -57,12 +74,15 @@
                     </div>
                 </div>
                 <div class="demande-actions">
+
+                    {# btn refuser #}
                     <form method="post" action="{{ path('app_ami_refuser', {'id': demande.id}) }}">
                         <button type="submit" class="btn-ajouter">
                             Refuser
                         </button>
                     </form>
 
+                    {# btn accepter #}
                     <form method="post" action="{{ path('app_ami_accepter', {'id': demande.id}) }}">
                         <button type="submit" class="btn-ajouter">
                             Accepter
@@ -72,6 +92,8 @@
             </div>
         {% else %}<p>Aucune demande d'amitié.</p>{% endfor %}
     </section>
+
+    {# btn retour #}
     <a class="btn-ajouter" href="{{ path('app_amis') }}">Retour à mes amis</a>
 
 </main>

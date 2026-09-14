@@ -17,7 +17,7 @@
     {{ form_row(registrationForm.photo) }}
     {{ form_row(registrationForm.agreeTerms) }}
 
-    <button class="btn-ajouter" type="submit">Créer le compte</button>
+    <button class=" space btn-ajouter" type="submit">Créer le compte</button>
 
     {{ form_end(registrationForm) }}
     <p class="deja-compte">
@@ -25,6 +25,10 @@
 
         <a class ="btn-creer-compte" href="{{ path('app_login') }}">Connectez-vous</a>
     </p>
+
+    <a class="space btn-editer" href="{{ path('app_home') }}">
+        Retour à l'accueil
+    </a>
 
 </div>
 {% endblock %}

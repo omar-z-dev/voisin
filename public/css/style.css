@@ -50,9 +50,18 @@ header {
     z-index: 1000;
 }
 
-/*header.scrolled {
-    background-color: rgb(234, 226, 178);
-}*/
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
 .navbar {
     display: flex;
@@ -61,6 +70,7 @@ header {
 
 .menu {
     display: flex;
+    align-items: center;
     gap: 20px;
     font-weight: bolder;
     font-size: 20px;
@@ -77,21 +87,9 @@ header {
     text-decoration-thickness: 3px;
 }
 /********************connexion*****************/
-.connexion {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-    align-items: center;
-    font-weight: bold;
+.space {
+    margin-top: 1rem;
 }
-.gr:hover {
-    text-decoration: underline;
-    text-decoration-color: red;
-    color: red;
-    text-underline-offset: 6px;
-    text-decoration-thickness: 3px;
-}
-
 /*************login*************/
 
 .login-container {
@@ -194,23 +192,10 @@ form input:focus {
 }
 
 /*************************** cards *****************************/
-.a-la-une h2 {
-    margin-bottom: 2rem;
-    font-size: 30px;
-}
+
 .connecter {
     color: blue;
     text-decoration: underline;
-}
-.a-la-une {
-    border: solid 1px rgb(203, 201, 201);
-    padding: 1rem;
-    border-radius: 0.2rem;
-    margin-bottom: 2rem;
-}
-.mes-parutions,
-.mes-parutions-non-publies {
-    margin-top: 2rem;
 }
 .btn-ajouter {
     align-self: flex-start;
@@ -224,6 +209,7 @@ form input:focus {
     appearance: none;
 }
 .btn-editer {
+    display: inline-block;
     align-self: flex-start;
     background-color: #3498db;
     padding: 0.5rem;
@@ -249,21 +235,6 @@ form[name="form-ajouter"] label {
     margin-bottom: 8px;
 }
 
-form[name="article"] input,
-form[name="article"] textarea,
-form[name="article"] select {
-    width: 50%;
-    padding: 8px 16px;
-    box-sizing: border-box;
-}
-
-form[name="article"] > div {
-    margin-top: 16px;
-}
-
-.form-btn {
-    margin-top: 3rem;
-}
 /*** pubs**/
 .all-pubs {
     display: grid;
@@ -292,9 +263,6 @@ form[name="article"] > div {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    margin-top: 2rem;
-    border: solid 1px rgb(203, 201, 201);
-    padding: 1rem;
     border-radius: 0.2rem;
 }
 
@@ -400,14 +368,15 @@ form[name="article"] > div {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.2rem;
+    padding: 1.5rem;
     border: solid 1px rgb(203, 201, 201);
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     width: 10%;
     color: black;
     background-color: rgb(195, 191, 191);
 }
+
 .ami img {
     object-fit: cover;
     width: 80px;
@@ -419,8 +388,9 @@ form[name="article"] > div {
     flex-direction: row;
     gap: 0.5rem;
     padding: 1rem;
-    border-radius: 2rem;
+    border-radius: 0.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: solid 1px rgb(203, 201, 201);
 }
 .filtre {
     display: flex;
@@ -465,4 +435,14 @@ form[name="article"] > div {
     border-radius: 5%;
     object-fit: cover;
     border: 2px solid #ddd;
+}
+.mes-demandes {
+    border: solid 1px rgb(203, 201, 201);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 70%;
+    margin-top: 2rem;
+    padding: 2rem;
+    font-size: 20px;
+    font-weight: bold;
 }

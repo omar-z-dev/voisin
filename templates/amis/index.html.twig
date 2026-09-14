@@ -9,10 +9,25 @@
         </div>
         <ul class="menu">
             {% if app.user %}
-                <li>
+                <li class="user-menu">
                     <span class="bonjour">
                         Bonjour {{ app.user.pseudo }}
                     </span>
+
+                    {# Avatar #}
+                    {% if app.user.photo %}
+                            <img
+                                class="avatar"
+                                src="{{ asset('uploads/profile/' ~ app.user.photo) }}"
+                                alt="Photo de profil"
+                            >
+                        {% else %}
+                            <img
+                                class="avatar"
+                                src="{{ asset('images/avatar-default.png') }}"
+                                alt="Photo de profil"
+                            >
+                    {% endif %} 
                 </li>
             {% endif %}
             <li>
@@ -32,11 +47,11 @@
 </header>
 
 <main>
-    <h2>Hello {{ user.pseudo }}</h2>
+    <h2>Hello {{ user.pseudo }}  👋 👋</h2>
 
     {# Liste de Mes amis #}
 
-    <h1>Mes amis :</h1>
+    <h2>Mes amis :</h2>
     <div class="amis-container">
         {% for amitie in amities %}
             {% if amitie.demandeur == app.user %}
@@ -46,14 +61,13 @@
             {% endif %}
 
             <div class="ami">
-                <h3>{{ ami.pseudo }}</h3>
-
                 {% if ami.photo %}
                     <img
                         src="{{ asset('uploads/profile/' ~ ami.photo) }}"
                         alt="Photo de {{ ami.pseudo }}"
                     >
                 {% endif %}
+                <p>{{ ami.pseudo }}</p>
             </div>
         {% else %}
             <p>Vous n'avez pas encore d'amis.</p>
@@ -63,7 +77,7 @@
 
     {# Les demande d'amis recus #}
 
-    <a href="{{ path('app_demandes') }}" class="demandes-link">
+    <a class="mes-demandes" href="{{ path('app_demandes') }}" class="demandes-link">
         Mes demandes
         <span class="badge">{{ demandes|length }}</span>
     </a>

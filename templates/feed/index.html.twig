@@ -7,11 +7,26 @@
             <a href="{{ path('app_feed') }}">Voisin.</a>
         </div>
         <ul class="menu">
-            {% if app.user %}
-                <li>
+             {% if app.user %}
+                <li class="user-menu">
                     <span class="bonjour">
                         Bonjour {{ app.user.pseudo }}
                     </span>
+
+                    {# Avatar #}
+                    {% if app.user.photo %}
+                            <img
+                                class="avatar"
+                                src="{{ asset('uploads/profile/' ~ app.user.photo) }}"
+                                alt="Photo de profil"
+                            >
+                        {% else %}
+                            <img
+                                class="avatar"
+                                src="{{ asset('images/avatar-default.png') }}"
+                                alt="Photo de profil"
+                            >
+                    {% endif %} 
                 </li>
             {% endif %}
             <li>
