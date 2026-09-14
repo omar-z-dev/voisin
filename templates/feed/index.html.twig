@@ -18,7 +18,7 @@
                 <a href="{{ path('app_feed') }}">Accueil</a>
             </li>
             <li>
-                <a href="{{ path('app_profil', {'id': app.user.id}) }}">
+                <a href="{{ path('app_mon_profil') }}">
                     Mon profil
                 </a>
             </li>
@@ -33,10 +33,34 @@
 </header>
 <main>
     <section class="publications">
+
         <h2>Fil d'actualité</h2>
+
+        {# filtrer les publications #}
+        <form class="filtre" method="get" action="{{ path('app_feed') }}">
+            <label for="filtre">Filterer les publications :</label>
+
+            <select name="filtre" id="filtre" onchange="this.form.submit()">
+                <option value="toutes" {% if filtre == 'toutes' %}selected{% endif %}>
+                    Toutes les publications visibles
+                </option>
+
+                <option value="publiques" {% if filtre == 'publiques' %}selected{% endif %}>
+                    Publiques uniquement
+                </option>
+
+                <option value="amis" {% if filtre == 'amis' %}selected{% endif %}>
+                    Amis uniquement
+                </option>
+            </select>
+        </form>
+
+        {# Nouvelle publication #}
         <a class="btn-ajouter" href="{{ path('app_publication_new') }}">
             Créer une publication
         </a>
+
+        {# liste des publication #}
         <div class="all-pubs">
             {% for publication in publications %}
                 <article class="pub">
@@ -61,6 +85,12 @@
                             <button class="btn-editer" type="submit">Supprimer</button>
                         </form>
                     {% endif %}
+
+                    {# lien vers la page de la publication #}
+                    <a class="btn-editer"
+                        href="{{ path('app_publication_afficher', {'id': publication.id}) }}">
+                            Voir
+                    </a>
                 </article>
             {% else %}
                 <p>Aucune publication pour le moment.</p>

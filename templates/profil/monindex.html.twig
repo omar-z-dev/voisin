@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+
+<div class="profil">
+
+    <h1>Mon profil</h1>
+
+    {% if user.photo %}
+        <img
+            src="{{ asset('uploads/profile/' ~ user.photo) }}"
+            alt="Photo de profil"
+        >
+    {% endif %}
+
+    <h2>{{ user.pseudo }}</h2>
+
+    {% if user.bio %}
+        <p>{{ user.bio }}</p>
+    {% endif %}
+
+    <p>
+        Inscrit le {{ user.dateInscription|date('d/m/Y') }}
+    </p>
+
+    <a class="btn-editer" href="{{ path('app_mon_profil_modifier') }}">
+        Modifier
+    </a>
+
+
+    <a class="btn-editer" href="{{ path('app_feed') }}">
+        Retour
+    </a>
+
+</div>
+
+{% endblock %}

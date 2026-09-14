@@ -78,9 +78,7 @@ final class PublicationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager->flush();
-
             return $this->redirectToRoute('app_feed');
         }
 
@@ -106,5 +104,15 @@ final class PublicationController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_feed');
+    }
+    /*=========================
+              Afficher
+    =========================*/
+    #[Route('/publication/{id}', name: 'app_publication_afficher')]
+    public function afficher(Publication $publication): Response
+    {
+        return $this->render('publication/afficher.html.twig', [
+            'publication' => $publication,
+        ]);
     }
 }

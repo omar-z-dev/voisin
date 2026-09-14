@@ -34,29 +34,31 @@
 <main>
     <h2>Hello {{ user.pseudo }}</h2>
 
-    {# Mes amis #}
+    {# Liste de Mes amis #}
 
-    <h1>Mes amis</h1>
-    {% for amitie in amities %}
-        {% if amitie.demandeur == app.user %}
-            {% set ami = amitie.destinataire %}
-        {% else %}
-            {% set ami = amitie.demandeur %}
-        {% endif %}
-
-        <div class="ami">
-            <h2>{{ ami.pseudo }}</h2>
-
-            {% if ami.photo %}
-                <img
-                    src="{{ asset('uploads/profile/' ~ ami.photo) }}"
-                    alt="Photo de {{ ami.pseudo }}"
-                >
+    <h1>Mes amis :</h1>
+    <div class="amis-container">
+        {% for amitie in amities %}
+            {% if amitie.demandeur == app.user %}
+                {% set ami = amitie.destinataire %}
+            {% else %}
+                {% set ami = amitie.demandeur %}
             {% endif %}
-        </div>
-    {% else %}
-        <p>Vous n'avez pas encore d'amis.</p>
-    {% endfor %}
+
+            <div class="ami">
+                <h3>{{ ami.pseudo }}</h3>
+
+                {% if ami.photo %}
+                    <img
+                        src="{{ asset('uploads/profile/' ~ ami.photo) }}"
+                        alt="Photo de {{ ami.pseudo }}"
+                    >
+                {% endif %}
+            </div>
+        {% else %}
+            <p>Vous n'avez pas encore d'amis.</p>
+        {% endfor %}
+    </div>
 
 
     {# Les demande d'amis recus #}
@@ -68,7 +70,7 @@
 
     {# Les utilisateurs disponibles #}
 
-     <h2>Les utilisateurs disponibles</h2>
+     <h2>Les utilisateurs disponibles :</h2>
 
         <div class="utilisateurs">
             {% for utilisateur in utilisateurs %}

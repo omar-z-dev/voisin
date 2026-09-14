@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publication{% endblock %}
+
+{% block body %}
+
+<h1>Détail de la Publication</h1>
+
+<div class="publication-detail">
+    <h3>
+        Publié par : {{ publication.user.pseudo }}
+    </h3>
+    <p>{{ publication.texte }}</p>
+
+    {% if publication.image %}
+        <img
+            src="{{ asset('uploads/publications/' ~ publication.image) }}"
+            alt="Image de la publication"
+        >
+    {% endif %}
+    <small>
+        Publié le {{ publication.dateCreation|date('d/m/Y à H:i') }}
+    </small>
+    <br><br>
+    <a class="btn-editer" href="{{ path('app_feed') }}">
+        Retour
+    </a>
+</div>
+{% endblock %}

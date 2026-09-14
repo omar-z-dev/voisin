@@ -41,11 +41,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private ?string $bio = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $dateInscription = null;
+
+    #[ORM\Column]
+    private bool $enLigne = false;
 
     /**
      * @var Collection<int, Publication>
@@ -287,6 +290,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $friendshipsReceived->setDestinataire(null);
             }
         }
+
+        return $this;
+    }
+    public function isEnLigne(): bool
+    {
+        return $this->enLigne;
+    }
+
+    public function setEnLigne(bool $enLigne): static
+    {
+        $this->enLigne = $enLigne;
 
         return $this;
     }
