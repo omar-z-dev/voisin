@@ -264,6 +264,7 @@ form[name="form-ajouter"] label {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     border-radius: 0.2rem;
+    margin-bottom: 2rem;
 }
 
 .utilisateur {
@@ -396,16 +397,12 @@ form[name="form-ajouter"] label {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
-    padding: 1rem;
-    border-radius: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 2rem;
-    margin-top: 2rem;
 }
 .filtre select {
     border-radius: 1rem;
     padding: 0.2rem;
 }
+
 .publication-detail {
     display: flex;
     flex-direction: column;
@@ -445,4 +442,17 @@ form[name="form-ajouter"] label {
     padding: 2rem;
     font-size: 20px;
     font-weight: bold;
+}
+.btn-creer-compte {
+    color: blue;
+}
+.liste-title {
+    margin-top: 3rem;
+}
+.filtre-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10rem;
+    padding: 1rem;
 }

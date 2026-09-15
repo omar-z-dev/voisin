@@ -10,17 +10,27 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\PublicationRepository;
 
 class MonProfilController extends AbstractController
 {
     #[Route('/mon-profil', name: 'app_mon_profil')]
-    public function profil(): Response
+    public function profil(PublicationRepository $publicationRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
+        $user = $this->getUser();
+
+        $publications = $publicationRepository->findBy(
+            ['user' => $user],
+            ['dateCreation' => 'DESC']
+        );
+
         return $this->render('profil/monindex.html.twig', [
-            'user' => $this->getUser(),
+            'user' => $user,
+            'publications' => $publications,
         ]);
+
     }
     /*==============================
 

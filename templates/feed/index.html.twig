@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Voisin. - Fil d'actualité{% endblock %}
 {% block body %}
+
 <header class="site-header">
     <nav class="navbar container">
         <div class="logo">
@@ -50,68 +51,62 @@
     <section class="publications">
 
         <h2>Fil d'actualité</h2>
+        <div class="filtre-container">
+            {# filtrer les publications #}
+            <form class="filtre" method="get" action="{{ path('app_feed') }}">
+                <label for="filtre">Filterer les publications :</label>
 
-        {# filtrer les publications #}
-        <form class="filtre" method="get" action="{{ path('app_feed') }}">
-            <label for="filtre">Filterer les publications :</label>
+                <select name="filtre" id="filtre" onchange="this.form.submit()">
+                    <option value="toutes" {% if filtre == 'toutes' %}selected{% endif %}>
+                        Toutes les publications visibles
+                    </option>
 
-            <select name="filtre" id="filtre" onchange="this.form.submit()">
-                <option value="toutes" {% if filtre == 'toutes' %}selected{% endif %}>
-                    Toutes les publications visibles
-                </option>
+                    <option value="publiques" {% if filtre == 'publiques' %}selected{% endif %}>
+                        Publiques uniquement
+                    </option>
 
-                <option value="publiques" {% if filtre == 'publiques' %}selected{% endif %}>
-                    Publiques uniquement
-                </option>
-
-                <option value="amis" {% if filtre == 'amis' %}selected{% endif %}>
-                    Amis uniquement
-                </option>
-            </select>
-        </form>
-
-        {# Nouvelle publication #}
-        <a class="btn-ajouter" href="{{ path('app_publication_new') }}">
-            Créer une publication
-        </a>
+                    <option value="amis" {% if filtre == 'amis' %}selected{% endif %}>
+                        Amis uniquement
+                    </option>
+                </select>
+            </form>
+            {# Nouvelle publication #}
+            <a class="btn-ajouter" href="{{ path('app_publication_new') }}">
+                Créer une publication
+            </a>
+        </div>
 
         {# liste des publication #}
+        <h2 class="liste-title"> Liste des Publications publiques: </h2>
         <div class="all-pubs">
             {% for publication in publications %}
-                <article class="pub">
-                    <h3>Publié par : {{ publication.user.pseudo }}</h3>
-                    <p>{{ publication.texte }}</p>
-                    {% if publication.image %}
-                        <img
-                            src="{{ asset('uploads/publications/' ~ publication.image) }}"
-                            alt="Image de la publication"
-                        >
-                    {% endif %}
-                    <small>
-                        Publié le {{ publication.dateCreation|date('d/m/Y à H:i') }}
-                    </small>
+                {% if publication.user != app.user %}
 
-                    {% if publication.user == app.user %}
+                    <article class="pub">
+                        <h3>Publié par : {{ publication.user.pseudo }}</h3>
+                        <p>{{ publication.texte }}</p>
+                        {% if publication.image %}
+                            <img
+                                src="{{ asset('uploads/publications/' ~ publication.image) }}"
+                                alt="Image de la publication"
+                            >
+                        {% endif %}
+                        <small>
+                            Publié le {{ publication.dateCreation|date('d/m/Y à H:i') }}
+                        </small>
 
-                        <a class="btn-editer" href="{{ path('app_publication_modifier', {'id': publication.id}) }}">
-                            Modifier
+                        {# lien vers la page de la publication #}
+                        <a class="btn-editer"
+                            href="{{ path('app_publication_afficher', {'id': publication.id}) }}">
+                                Voir
                         </a>
-                        <form method="post" action="{{ path('app_publication_supprimer', {'id': publication.id}) }}">
-                            <button class="btn-editer" type="submit">Supprimer</button>
-                        </form>
-                    {% endif %}
+                    </article>
+                {% endif %}
 
-                    {# lien vers la page de la publication #}
-                    <a class="btn-editer"
-                        href="{{ path('app_publication_afficher', {'id': publication.id}) }}">
-                            Voir
-                    </a>
-                </article>
             {% else %}
                 <p>Aucune publication pour le moment.</p>
             {% endfor %}
-        </div>
-       
+        </div>       
     </section>
 </main>
 {% endblock %}

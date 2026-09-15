@@ -4,26 +4,79 @@
 
 {% block body %}
 
-<h1>Détail de la Publication</h1>
 
-<div class="publication-detail">
-    <h3>
-        Publié par : {{ publication.user.pseudo }}
-    </h3>
-    <p>{{ publication.texte }}</p>
+<header class="site-header">
+    <nav class="navbar container">
+        <div class="logo">
+            <a href="{{ path('app_feed') }}">Voisin.</a>
+        </div>
 
-    {% if publication.image %}
-        <img
-            src="{{ asset('uploads/publications/' ~ publication.image) }}"
-            alt="Image de la publication"
-        >
-    {% endif %}
-    <small>
-        Publié le {{ publication.dateCreation|date('d/m/Y à H:i') }}
-    </small>
-    <br><br>
-    <a class="btn-editer" href="{{ path('app_feed') }}">
-        Retour
-    </a>
-</div>
+        <ul class="menu">
+            {% if app.user %}
+                <li class="user-menu">
+                    <span class="bonjour">
+                        Bonjour {{ app.user.pseudo }}
+                    </span>
+
+                    {# Avatar #}
+                    {% if app.user.photo %}
+                            <img
+                                class="avatar"
+                                src="{{ asset('uploads/profile/' ~ app.user.photo) }}"
+                                alt="Photo de profil"
+                            >
+                        {% else %}
+                            <img
+                                class="avatar"
+                                src="{{ asset('images/avatar-default.png') }}"
+                                alt="Photo de profil"
+                            >
+                    {% endif %} 
+                </li>
+            {% endif %}
+            <li>
+                <a href="{{ path('app_feed') }}">Accueil</a>
+            </li>
+
+            <li>
+                 <a href="{{ path('app_mon_profil') }}">
+                    Mon profil
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_amis') }}">Mes amis</a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Détail de la Publication</h1>
+
+    <div class="publication-detail">
+        <h3>
+            Publié par : {{ publication.user.pseudo }}
+        </h3>
+        <p>{{ publication.texte }}</p>
+
+        {% if publication.image %}
+            <img
+                src="{{ asset('uploads/publications/' ~ publication.image) }}"
+                alt="Image de la publication"
+            >
+        {% endif %}
+        <small>
+            Publié le {{ publication.dateCreation|date('d/m/Y à H:i') }}
+        </small>
+        <br><br>
+        <a class="btn-editer" href="{{ path('app_feed') }}">
+            Retour
+        </a>
+    </div>
+</main>
 {% endblock %}

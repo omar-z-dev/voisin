@@ -4,30 +4,67 @@
 
 {% block body %}
 
-<div class="profil">
+<header class="site-header">
+    <nav class="navbar container">
+        <div class="logo">
+            <a href="{{ path('app_feed') }}">Voisin.</a>
+        </div>
 
-    <h1>Modifier mon profil</h1>
+        <ul class="menu">
+            {% if app.user %}
+                <li>
+                    <span class="bonjour">
+                        Bonjour {{ app.user.pseudo }}
+                    </span>
+                </li>
+            {% endif %}
+            <li>
+                <a href="{{ path('app_feed') }}">Accueil</a>
+            </li>
 
-    {{ form_start(form) }}
+            <li>
+                <a href="{{ path('app_mon_profil') }}">
+                    Mon profil
+                </a>
+            </li>
 
-        {{ form_row(form.pseudo) }}
+            <li>
+                <a href="{{ path('app_amis') }}">Mes amis</a>
+            </li>
 
-        {{ form_row(form.bio) }}
+            <li>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
+</header>
 
-        {{ form_row(form.photo) }}
+<main class="main">
+    <div class="profil">
 
-        <button type="submit" class="btn-editer">
-            Enregistrer
-        </button>
+        <h1>Modifier mon profil</h1>
 
-    {{ form_end(form) }}
+        {{ form_start(form) }}
 
-    <br>
+            {{ form_row(form.pseudo) }}
 
-    <a class="btn-editer" href="{{ path('app_mon_profil') }}">
-        Annuler
-    </a>
+            {{ form_row(form.bio) }}
 
-</div>
+            {{ form_row(form.photo) }}
+
+            <button type="submit" class="btn-editer">
+                Enregistrer
+            </button>
+
+        {{ form_end(form) }}
+
+        <br>
+
+        <a class="btn-editer" href="{{ path('app_mon_profil') }}">
+            Annuler
+        </a>
+
+    </div>
+</main>
 
 {% endblock %}
