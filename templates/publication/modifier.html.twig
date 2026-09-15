@@ -41,7 +41,11 @@
         {{ form_row(form.image) }}
         {{ form_row(form.visibilite) }}
 
-        <button class="btn-editer" type="submit">Valider la modification</button>
+        {# btn valider : au clic sur valider , ca va au controleur et $form->handleRequest($request) récupère les nouvelles valeurs. #}
+        <button class="btn-editer" type="submit">
+            Valider la modification
+        </button>
+
         <div>
             <a  href="{{ path('app_feed') }}" class="btn-editer">
                 Retour

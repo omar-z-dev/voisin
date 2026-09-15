@@ -29,23 +29,18 @@
             </p>
         </section>
 
+        {# section liste des publications #}
         <section>
             <h2>Publications récentes :</h2>
             <div class="all-pubs">
                 {% if publications is empty %}
-
                     <p>Aucune publication pour le moment.</p>
-
                 {% else %}
 
                     {% for publication in publications %}
-
                         <article class="pub">
-
                             <h3>{{ publication.user.pseudo }}</h3>
-
                             <p>{{ publication.texte }}</p>
-
                             {% if publication.image %}
                                 <img
                                     src="{{ asset('uploads/publications/' ~ publication.image) }}"
@@ -62,11 +57,8 @@
                                 href="{{ path('app_publication_afficher', {'id': publication.id}) }}">
                                     Voir
                             </a>
-
                         </article>
-
                     {% endfor %}
-
                 {% endif %}
             </div>
         </section>

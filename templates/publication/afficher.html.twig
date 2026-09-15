@@ -5,55 +5,90 @@
 {% block body %}
 
 
-<header class="site-header">
-    <nav class="navbar container">
-        <div class="logo">
-            <a href="{{ path('app_feed') }}">Voisin.</a>
-        </div>
+{% if app.user %}
 
-        <ul class="menu">
-            {% if app.user %}
+    <header class="site-header">
+        <nav class="navbar container">
+
+            <div class="logo">
+                <a href="{{ path('app_feed') }}">Voisin.</a>
+            </div>
+
+            <ul class="menu">
+
                 <li class="user-menu">
                     <span class="bonjour">
                         Bonjour {{ app.user.pseudo }}
                     </span>
 
-                    {# Avatar #}
                     {% if app.user.photo %}
-                            <img
-                                class="avatar"
-                                src="{{ asset('uploads/profile/' ~ app.user.photo) }}"
-                                alt="Photo de profil"
-                            >
-                        {% else %}
-                            <img
-                                class="avatar"
-                                src="{{ asset('images/avatar-default.png') }}"
-                                alt="Photo de profil"
-                            >
-                    {% endif %} 
+                        <img
+                            class="avatar"
+                            src="{{ asset('uploads/profile/' ~ app.user.photo) }}"
+                            alt="Photo de profil"
+                        >
+                    {% else %}
+                        <img
+                            class="avatar"
+                            src="{{ asset('images/avatar-default.png') }}"
+                            alt="Photo de profil"
+                        >
+                    {% endif %}
                 </li>
-            {% endif %}
-            <li>
-                <a href="{{ path('app_feed') }}">Accueil</a>
-            </li>
 
-            <li>
-                 <a href="{{ path('app_mon_profil') }}">
-                    Mon profil
-                </a>
-            </li>
+                <li>
+                    <a href="{{ path('app_feed') }}">Accueil</a>
+                </li>
 
-            <li>
-                <a href="{{ path('app_amis') }}">Mes amis</a>
-            </li>
+                <li>
+                    <a href="{{ path('app_mon_profil') }}">
+                        Mon profil
+                    </a>
+                </li>
 
-            <li>
-                <a href="{{ path('app_logout') }}">Se déconnecter</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+                <li>
+                    <a href="{{ path('app_amis') }}">Mes amis</a>
+                </li>
+
+                <li>
+                    <a href="{{ path('app_logout') }}">
+                        Se déconnecter
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+
+{% else %}
+
+    <header class="site-header">
+        <nav class="navbar container">
+
+            <div class="logo">
+                <a href="{{ path('app_home') }}">Home</a>
+            </div>
+
+            <ul class="menu">
+
+                <li>
+                    <a href="{{ path('app_login') }}">
+                        Se connecter
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ path('app_register') }}">
+                        Créer un compte
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+    </header>
+
+{% endif %}
 
 <main>
     <h1>Détail de la Publication</h1>
@@ -74,9 +109,9 @@
             Publié le {{ publication.dateCreation|date('d/m/Y à H:i') }}
         </small>
         <br><br>
-        <a class="btn-editer" href="{{ path('app_feed') }}">
-            Retour
-        </a>
+        <a class="btn-editer" href="javascript:history.back()">
+    Retour
+</a>
     </div>
 </main>
 {% endblock %}

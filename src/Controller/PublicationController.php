@@ -18,12 +18,14 @@ final class PublicationController extends AbstractController
     /*=========================
               Ajouter
     =========================*/
+    
     #[Route('/publication/ajouter', name: 'app_publication_new')]
     public function ajouter (Request $request, EntityManagerInterface $entityManager): Response
     {
         // Seul un utilisateur connecté peut créer un article
         $this->denyAccessUnlessGranted('ROLE_USER');
-         // Création d’un public vide
+
+        // Création d’un publication vide
         $publication = new Publication();
 
         // Création du formulaire
@@ -35,9 +37,12 @@ final class PublicationController extends AbstractController
             $publication->setUser($this->getUser());
             $publication->setDateCreation(new \DateTimeImmutable());
 
+            // recuperer l'image
             $image = $form->get('image')->getData();
 
+            // si l'utilisateur a choisit une image
             if ($image instanceof UploadedFile) {
+                // renommer l'image
                 $nomImage = uniqid() . '.' . $image->guessExtension();
 
                 $image->move(
@@ -45,15 +50,21 @@ final class PublicationController extends AbstractController
                     $nomImage
                 );
 
+                // donner le nom de l'image a la publication
                 $publication->setImage($nomImage);
             }
 
+            //Cette nouvelle publication doit être enregistrée
             $entityManager->persist($publication);
+
+            //Enregistrer la nouvelle publication
             $entityManager->flush();
 
+            //Une fois l'action terminée, redirige le navigateur vers la route app_feed
             return $this->redirectToRoute('app_feed');
         }
 
+        // Affichage du formulaire
         return $this->render('publication/ajouter.html.twig', [
             'form' => $form,
         ]);
@@ -62,6 +73,7 @@ final class PublicationController extends AbstractController
     /*=========================
               Modifier
     =========================*/
+
     #[Route('/publication/{id}/modifier', name: 'app_publication_modifier')]
     public function modifier(
         Publication $publication,
@@ -74,14 +86,17 @@ final class PublicationController extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
+        // Création du formulaire avec les valeurs actuelles de l'objet $publication
         $form = $this->createForm(PublicationType::class, $publication);
+
+        // Récupération des données envoyées par le formulaire
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             return $this->redirectToRoute('app_feed');
         }
-
+        // Affichage du formulaire de modification
         return $this->render('publication/modifier.html.twig', [
             'form' => $form,
         ]);
@@ -89,6 +104,7 @@ final class PublicationController extends AbstractController
     /*=========================
               Supprimer
     =========================*/
+
     #[Route('/publication/{id}/supprimer', name: 'app_publication_supprimer', methods: ['POST'])]
     public function supprimer(
         Publication $publication,
@@ -105,9 +121,11 @@ final class PublicationController extends AbstractController
 
         return $this->redirectToRoute('app_feed');
     }
+
     /*=========================
               Afficher
     =========================*/
+
     #[Route('/publication/{id}', name: 'app_publication_afficher')]
     public function afficher(Publication $publication): Response
     {

@@ -68,6 +68,12 @@
                         src="{{ asset('uploads/profile/' ~ ami.photo) }}"
                         alt="Photo de {{ ami.pseudo }}"
                     >
+                     {% else %}
+                        <img
+                        class="avatar"
+                        src="{{ asset('images/avatar-default.png') }}"
+                        alt="Photo de profil"
+                        >
                 {% endif %}
                 <p>{{ ami.pseudo }}</p>
             </div>

@@ -48,10 +48,12 @@
     </nav>
 </header>
 <main>
+    <h2>Hello {{ user.pseudo }}  👋 👋</h2>
     <section class="publications">
-
-        <h2>Fil d'actualité</h2>
+        
+        <h2>Mon Fil d'actualité</h2>
         <div class="filtre-container">
+
             {# filtrer les publications #}
             <form class="filtre" method="get" action="{{ path('app_feed') }}">
                 <label for="filtre">Filterer les publications :</label>
@@ -70,9 +72,10 @@
                     </option>
                 </select>
             </form>
+            
             {# Nouvelle publication #}
             <a class="btn-ajouter" href="{{ path('app_publication_new') }}">
-                Créer une publication
+                ➕ Créer une publication
             </a>
         </div>
 

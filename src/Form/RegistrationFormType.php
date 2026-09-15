@@ -21,21 +21,23 @@ class RegistrationFormType extends AbstractType
             ->add('pseudo')
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Accepter les termes',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue(
-                        message: 'You should agree to our terms.',
+                        message: 'Vous devez accepter nos termes.',
                     ),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => 'Mot de passe',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank(
-                        message: 'Please enter a password',
+                        message: 'Merci de saisir un mot de passe',
                     ),
                     new Length(
                         min: 6,
