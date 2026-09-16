@@ -284,6 +284,7 @@ form[name="form-ajouter"] label {
 }
 
 .alert {
+    margin-top: 5rem;
     color: red;
     font-weight: bold;
 }

@@ -71,8 +71,8 @@ class AmiController extends AbstractController
             $demandeur, $destinataire);
 
         if ($amitieExistante) {
+           
             $this->addFlash('error', 'Une demande d’amitié existe déjà.');
-
             return $this->redirectToRoute('app_profil', [
                 'id' => $destinataire->getId(),
             ]);
@@ -109,7 +109,6 @@ class AmiController extends AbstractController
         }
 
         $amitie->setStatut('acceptee');
-
         $entityManager->flush();
 
         return $this->redirectToRoute('app_amis');
@@ -137,7 +136,7 @@ class AmiController extends AbstractController
     }
     /*==================================================
 
-             ROUTE POUR AFFICHER LES DEMANDES D'AMI
+             AFFICHER LES DEMANDES D'AMI
 
     ====================================================*/
     #[Route('/amis/demandes', name: 'app_demandes')]
